@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库工具</title>
+    {% block link %}{% endblock %}
+</head>
+<body>
+<div>
+    {% if g.nick %}已连接数据库 -- {{ g.nick }}
+    {% else %}暂未连接数据库
+    {% endif %}
+</div>
+<div>
+    <form method="post">
+        <input name="nick" placeholder="数据库简称" required>
+        <input name="host" placeholder="请输入域名或ip" required>
+        <input name="port" placeholder="请输入端口号" required>
+        <input name="user" placeholder="请输入用户名" required>
+        <input name="pswd" placeholder="请输入密码" type="password" required>
+        <input type="submit" value="提交">
+        <p style="color: red;">{{ error }}</p>
+    </form>
+</div>
+<div>
+    <form action="/query_one" method="post">
+        <textarea name="query_one"></textarea><input type="submit" value="查询">
+    </form>
+</div>
+<div style="width: 300px; float: left">
+    {% if dbs %}
+    <ul style="list-style: none">
+        {% for db in dbs %}
+            <li>
+                <a href="{{ url_for("query", name=db) }}">{{ db }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<div style="width: 300px;float: left">
+    {% if tables %}
+    <ul style="list-style: none">
+        {% for table in tables %}
+            <li style="width: 300px">
+                <a style="width: 300px;word-break: break-all;margin-bottom: 10px" href="{{ url_for("table_data", name=table) }}">{{ table }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<div style="float: left">
+    <table>
+        {% if cols and datas %}
+        <tr>
+            {% for col in cols %}
+            <td>{{ col }}</td>
+            {% endfor %}
+        </tr>
+        {% for data in datas %}
+        <tr>
+            {% for d in data %}
+            <td>{{ d }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+</div>
+{% block body %}{% endblock %}
+</body>
+</html>
