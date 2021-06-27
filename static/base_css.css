@@ -1,0 +1,93 @@
+body{
+    margin: 0;
+    padding: 30px;
+}
+.default-input{
+    height: 30px;
+    width:180px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline-style: none;
+    padding: 0 10px;
+}
+
+.default-btn{
+    width: 100px;
+    height: 30px;
+    background: #2bae85;
+    color: #fff;
+    border: 1px solid #2bae85;
+    border-radius: 4px;
+}
+.head-title{
+    font-size: 16px;
+    color: #1f2040;
+    font-weight: 600;
+    margin: 10px 0;
+}
+.head-filter{
+    border-bottom: 1px solid #5bae23;
+    box-shadow: 0px 5px 6px -4px #5bae23;
+    margin-bottom: 20px;
+}
+.default-textarea{
+    width: 800px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    outline-style: none;
+    margin-right: 10px;
+}
+.sql-form{
+    display: flex;
+    align-items: flex-end;
+}
+.db-wrap{
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+    width: 100%;
+    overflow: hidden;
+}
+.db-row{
+    padding: 0;
+    list-style: none;
+    width: 385px;
+    margin: 0;
+}
+.db-row .db-name{
+    text-decoration: none;
+    color:  #43b244;
+}
+.db-table{
+
+}
+.table-row{
+    list-style: none
+}
+.table-row .table-name{
+    text-decoration: none;
+    color: #134857;
+}
+.table-wrap{
+    max-width: 900px;
+    overflow-x: scroll;
+    height: 500px;
+    min-width: 900px;
+    border: 1px solid #f2f2f2;
+    overflow-y: scroll;
+}
+
+.table-wrap td, th{
+    padding: 5px 15px;
+}
+.table-wrap tr:nth-child(even){
+    background: #c4cbcf;
+}
+
+.table-wrap th{
+    background:#66a9c9;
+}
+

@@ -63,7 +63,7 @@ def query(name):
     session["tables"] = tables = return_data(session["host"], session["port"], session["user"], session["pswd"], sql, databases=name)
     session["db_name"] = name
 
-    return render_template("index.html", dbs=session["dbs"], tables=tables)
+    return render_template("index.html", dbs=session["dbs"], tables=tables, query_db=name)
 
 
 @app.route("/table_data/<name>", methods=["GET"])
@@ -73,7 +73,7 @@ def table_data(name):
     sql = "select * from %s;" % name
     datas = return_data(session["host"], session["port"], session["user"], session["pswd"], sql, databases=session["db_name"], status=1)
 
-    return render_template("index.html", dbs=session["dbs"], tables=session["tables"], cols=session["col"], datas=datas)
+    return render_template("index.html", dbs=session["dbs"], tables=session["tables"], cols=session["col"], datas=datas, query_db=session["db_name"])
 
 
 @app.route("/query_one", methods=["POST"])
@@ -82,7 +82,7 @@ def query_one():
         sql = request.form["query_one"]
         datas = return_data(session["host"], session["port"], session["user"], session["pswd"], sql, databases=session["db_name"], status=1)
 
-        return render_template("index.html", dbs=session["dbs"], tables=session["tables"], cols=session["col"], datas=datas)
+        return render_template("index.html", dbs=session["dbs"], tables=session["tables"], cols=session["col"], datas=datas, query_db=session["db_name"])
 
 
 if __name__ == '__main__':

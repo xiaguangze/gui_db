@@ -3,70 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <title>数据库工具</title>
-    {% block link %}{% endblock %}
+    <link href="../static/base_css.css" rel="stylesheet" />
 </head>
 <body>
-<div>
+<div class="head-title">
     {% if g.nick %}已连接数据库 -- {{ g.nick }}
     {% else %}暂未连接数据库
     {% endif %}
 </div>
-<div>
+<div class="head-filter">
     <form method="post">
-        <input name="nick" placeholder="数据库简称" required>
-        <input name="host" placeholder="请输入域名或ip" required>
-        <input name="port" placeholder="请输入端口号" required>
-        <input name="user" placeholder="请输入用户名" required>
-        <input name="pswd" placeholder="请输入密码" type="password" required>
-        <input type="submit" value="提交">
+        <input name="nick" placeholder="数据库简称" required class="default-input">
+        <input name="host" placeholder="请输入域名或ip" required class="default-input">
+        <input name="port" placeholder="请输入端口号" required class="default-input">
+        <input name="user" placeholder="请输入用户名" required class="default-input">
+        <input name="pswd" placeholder="请输入密码" type="password" required class="default-input">
+        <input type="submit" value="提交" class="default-btn">
         <p style="color: red;">{{ error }}</p>
     </form>
 </div>
 <div>
-    <form action="/query_one" method="post">
-        <textarea name="query_one"></textarea><input type="submit" value="查询">
+    <div class="head-title"> SQL查询 </div>
+    <form action="/query_one" method="post" class="sql-form">
+        <textarea name="query_one" class="default-textarea"></textarea><input type="submit" value="查询" class="default-btn">
     </form>
 </div>
-<div style="width: 300px; float: left">
+<div  class="db-wrap">
     {% if dbs %}
-    <ul style="list-style: none">
+    <ul class="db-row">
         {% for db in dbs %}
-            <li>
-                <a href="{{ url_for("query", name=db) }}">{{ db }}</a>
+            <li style=" padding: 5px 0;">
+                <a href="{{ url_for("query", name=db) }}" class="db-name"> &gt; {{ db }}</a>
+                <div class="db-table">
+                    {% if tables and query_db == db%}
+                    <ul class="table-row">
+                        {% for table in tables %}
+                            <li style=" padding: 2px 0;">
+                                <a class="table-name" href="{{ url_for("table_data", name=table) }}"> &gt; &nbsp;&nbsp;{{ table }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
             </li>
         {% endfor %}
     </ul>
     {% endif %}
+
+    <div class="table-wrap">
+        <table cellspacing="0" cellpadding="0" >
+            {% if cols and datas %}
+                <thead>
+                    {% for col in cols %}
+                    <th>{{ col }}</th>
+                    {% endfor %}
+                </thead>
+                <tbody>
+                    {% for data in datas %}
+                    <tr>
+                        {% for d in data %}
+                        <td>{{ d }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            {% endif %}
+        </table>
+    </div>
 </div>
-<div style="width: 300px;float: left">
-    {% if tables %}
-    <ul style="list-style: none">
-        {% for table in tables %}
-            <li style="width: 300px">
-                <a style="width: 300px;word-break: break-all;margin-bottom: 10px" href="{{ url_for("table_data", name=table) }}">{{ table }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
-<div style="float: left">
-    <table>
-        {% if cols and datas %}
-        <tr>
-            {% for col in cols %}
-            <td>{{ col }}</td>
-            {% endfor %}
-        </tr>
-        {% for data in datas %}
-        <tr>
-            {% for d in data %}
-            <td>{{ d }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% endif %}
-    </table>
-</div>
+
+
 {% block body %}{% endblock %}
 </body>
 </html>
