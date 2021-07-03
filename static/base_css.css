@@ -31,13 +31,13 @@ body{
     margin-bottom: 20px;
 }
 .default-textarea{
-    width: 800px;
-    height: 100px;
+    width: 80%;
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 10px;
+    padding: 5px 0 5px 5px;
     outline-style: none;
     margin-right: 10px;
+    font-size: 30px;
 }
 .sql-form{
     display: flex;
@@ -56,6 +56,8 @@ body{
     list-style: none;
     width: 385px;
     margin: 0;
+    height: 500px;
+    overflow: auto;
 }
 .db-row .db-name{
     text-decoration: none;
@@ -70,18 +72,25 @@ body{
 .table-row .table-name{
     text-decoration: none;
     color: #134857;
+    word-break: break-all;
+    display: flex;
+}
+.table-row .table-name-left{
+    margin-right: 6px;
 }
 .table-wrap{
-    max-width: 900px;
-    overflow-x: scroll;
     height: 500px;
-    min-width: 900px;
     border: 1px solid #f2f2f2;
-    overflow-y: scroll;
+    overflow: auto;
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .table-wrap td, th{
     padding: 5px 15px;
+    text-align: center;
 }
 .table-wrap tr:nth-child(even){
     background: #c4cbcf;
@@ -90,4 +99,42 @@ body{
 .table-wrap th{
     background:#66a9c9;
 }
+.table-wrap-content{
+    width: 100%;
+    overflow: auto;
+    /*display: flex;*/
+}
+.table-wrap-content table{
+    width:100%;
+}
 
+.pagination{
+    margin: 10px auto;
+    display: flex;
+}
+.pagination .pre-btn-disabled, .next-btn-disabled{
+    background-color: #f4f4f5;
+    color: #c0c4cc;
+    width: 30px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    cursor: not-allowed;
+}
+.pagination .number, .next-btn , .pre-btn{
+    background-color: #f4f4f5;
+    color: #606266;
+    min-width: 30px;
+    border-radius: 2px;
+    width: 30px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 4px;
+}
+.pagination .active {
+    background-color: #409eff;
+    color: #fff;
+}
